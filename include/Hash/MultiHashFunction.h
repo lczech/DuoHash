@@ -8,7 +8,9 @@
 	#define INCLUDE_HASH_MULTIHASHFUNCTION_H_
 
 	#include "Hash/HashFunction.h"
-	#include <omp.h>
+	#ifdef _OPENMP
+		#include <omp.h>
+	#endif
 
 
 
