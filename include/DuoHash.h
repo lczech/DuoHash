@@ -14,12 +14,12 @@
 	#include <string>
 	#include <vector>
 
-	
-	
-	
+
+
+
 	bool loadFile(std::string fileName, std::vector<std::string>& lines)
 	{
-		std::cerr << "Load file... " << std::flush;
+		// std::cerr << "Load file... " << std::flush;
 
 		std::ifstream fileStream(fileName);
 		if (!fileStream.is_open())
@@ -34,7 +34,7 @@
 
 		fileStream.close();
 
-		std::cerr << "Complete\n" << std::flush;
+		// std::cerr << "Complete\n" << std::flush;
 		return true;
 	}
 
@@ -76,7 +76,7 @@
 				v_hashings.clear();
 				v_encodings.resize(this->sequences.size());
 				v_hashings.resize(this->sequences.size());
-				
+
 				for (size_t seq = 0; seq < this->sequences.size(); seq++)
 				{
 					GetHashes_naive(this->sequences[seq], this->spaced, v_encodings[seq]);
@@ -89,7 +89,7 @@
 				v_spacedKmers.clear();
 				v_encodings.resize(this->sequences.size());
 				v_spacedKmers.resize(this->sequences.size());
-				
+
 				for (size_t seq = 0; seq < this->sequences.size(); seq++)
 				{
 					GetHashes_naive(this->sequences[seq], this->spaced, v_encodings[seq]);
@@ -104,7 +104,7 @@
 				v_encodings.resize(this->sequences.size());
 				v_hashings.resize(this->sequences.size());
 				v_spacedKmers.resize(this->sequences.size());
-				
+
 				for (size_t seq = 0; seq < this->sequences.size(); seq++)
 				{
 					GetHashes_naive(this->sequences[seq], this->spaced, v_encodings[seq]);
@@ -117,7 +117,7 @@
 			{
 				v_encodings.clear();
 				v_encodings.resize(this->sequences.size());
-				
+
 				for (size_t seq = 0; seq < this->sequences.size(); seq++)
 					GetHashes_speedup_previous(this->sequences[seq], this->spaced, v_encodings[seq]);
 			}
@@ -127,7 +127,7 @@
 				v_hashings.clear();
 				v_encodings.resize(this->sequences.size());
 				v_hashings.resize(this->sequences.size());
-				
+
 				for (size_t seq = 0; seq < this->sequences.size(); seq++)
 				{
 					GetHashes_speedup_previous(this->sequences[seq], this->spaced, v_encodings[seq]);
@@ -140,7 +140,7 @@
 				v_spacedKmers.clear();
 				v_encodings.resize(this->sequences.size());
 				v_spacedKmers.resize(this->sequences.size());
-				
+
 				for (size_t seq = 0; seq < this->sequences.size(); seq++)
 				{
 					GetHashes_speedup_previous(this->sequences[seq], this->spaced, v_encodings[seq]);
@@ -155,7 +155,7 @@
 				v_encodings.resize(this->sequences.size());
 				v_hashings.resize(this->sequences.size());
 				v_spacedKmers.resize(this->sequences.size());
-				
+
 				for (size_t seq = 0; seq < this->sequences.size(); seq++)
 				{
 					GetHashes_speedup_previous(this->sequences[seq], this->spaced, v_encodings[seq]);
@@ -168,7 +168,7 @@
 			{
 				v_encodings.clear();
 				v_encodings.resize(this->sequences.size());
-				
+
 				for (size_t seq = 0; seq < this->sequences.size(); seq++)
 					GetHashes_with_ISSH(this->sequences[seq], this->spaced, v_encodings[seq]);
 			}
@@ -178,7 +178,7 @@
 				v_hashings.clear();
 				v_encodings.resize(this->sequences.size());
 				v_hashings.resize(this->sequences.size());
-				
+
 				for (size_t seq = 0; seq < this->sequences.size(); seq++)
 				{
 					GetHashes_with_ISSH(this->sequences[seq], this->spaced, v_encodings[seq]);
@@ -191,7 +191,7 @@
 				v_spacedKmers.clear();
 				v_encodings.resize(this->sequences.size());
 				v_spacedKmers.resize(this->sequences.size());
-				
+
 				for (size_t seq = 0; seq < this->sequences.size(); seq++)
 				{
 					GetHashes_with_ISSH(this->sequences[seq], this->spaced, v_encodings[seq]);
@@ -206,7 +206,7 @@
 				v_encodings.resize(this->sequences.size());
 				v_hashings.resize(this->sequences.size());
 				v_spacedKmers.resize(this->sequences.size());
-				
+
 				for (size_t seq = 0; seq < this->sequences.size(); seq++)
 				{
 					GetHashes_with_ISSH(this->sequences[seq], this->spaced, v_encodings[seq]);
@@ -272,6 +272,11 @@
 				return this->spaced;
 			}
 
+			inline const size_t getSpacedQmerCount() const
+			{
+				return 1;
+			}
+
 		private:
 			std::vector<std::string> sequences;
 			SpacedQmer spaced;
@@ -293,7 +298,7 @@
 
 				this->max_transient_length = 0;
 				for(size_t j = 0; j < this->multi_spaced.size(); j++)
-				{	
+				{
 					this->VV_shifts[j] = this->multi_spaced[j].GetMultipleShifts();
 					this->v_pos_one[j] = this->multi_spaced[j].GetPosOne();
 					this->max_transient_length = std::max(this->VV_shifts[j].size(), this->max_transient_length);
@@ -312,7 +317,7 @@
 				this->multi_spaced = multi_spaced;
 				this->k = this->multi_spaced[0].GetWeight();
 
-				
+
 				this->spaced_qmers.init(this->multi_spaced);
 
 				this->VV_shifts.resize(this->multi_spaced.size());
@@ -320,7 +325,7 @@
 
 				this->max_transient_length = 0;
 				for(size_t j = 0; j < this->multi_spaced.size(); j++)
-				{	
+				{
 					this->VV_shifts[j] = this->multi_spaced[j].GetMultipleShifts();
 					this->v_pos_one[j] = this->multi_spaced[j].GetPosOne();
 					this->max_transient_length = std::max(this->VV_shifts[j].size(), this->max_transient_length);
@@ -340,7 +345,7 @@
 			{
 				v_encodings_v.clear();
 				v_encodings_v.resize(this->sequences.size());
-				
+
 				for (size_t seq = 0; seq < this->sequences.size(); seq++)
 				{
 					v_encodings_v[seq].resize(this->multi_spaced.size());
@@ -354,7 +359,7 @@
 				v_hashings_v.clear();
 				v_encodings_v.resize(this->sequences.size());
 				v_hashings_v.resize(this->sequences.size());
-				
+
 				for (size_t seq = 0; seq < this->sequences.size(); seq++)
 				{
 					v_encodings_v[seq].resize(this->multi_spaced.size());
@@ -369,7 +374,7 @@
 				v_spacedKmers_v.clear();
 				v_encodings_v.resize(this->sequences.size());
 				v_spacedKmers_v.resize(this->sequences.size());
-				
+
 				for (size_t seq = 0; seq < this->sequences.size(); seq++)
 				{
 					v_encodings_v[seq].resize(this->multi_spaced.size());
@@ -386,7 +391,7 @@
 				v_encodings_v.resize(this->sequences.size());
 				v_hashings_v.resize(this->sequences.size());
 				v_spacedKmers_v.resize(this->sequences.size());
-				
+
 				for (size_t seq = 0; seq < this->sequences.size(); seq++)
 				{
 					v_encodings_v[seq].resize(this->multi_spaced.size());
@@ -401,7 +406,7 @@
 			{
 				v_encodings_v.clear();
 				v_encodings_v.resize(this->sequences.size());
-				
+
 				for (size_t seq = 0; seq < this->sequences.size(); seq++)
 				{
 					v_encodings_v[seq].resize(this->multi_spaced.size());
@@ -415,7 +420,7 @@
 				v_hashings_v.clear();
 				v_encodings_v.resize(this->sequences.size());
 				v_hashings_v.resize(this->sequences.size());
-				
+
 				for (size_t seq = 0; seq < this->sequences.size(); seq++)
 				{
 					v_encodings_v[seq].resize(this->multi_spaced.size());
@@ -430,7 +435,7 @@
 				v_spacedKmers_v.clear();
 				v_encodings_v.resize(this->sequences.size());
 				v_spacedKmers_v.resize(this->sequences.size());
-				
+
 				for (size_t seq = 0; seq < this->sequences.size(); seq++)
 				{
 					v_encodings_v[seq].resize(this->multi_spaced.size());
@@ -447,7 +452,7 @@
 				v_encodings_v.resize(this->sequences.size());
 				v_hashings_v.resize(this->sequences.size());
 				v_spacedKmers_v.resize(this->sequences.size());
-				
+
 				for (size_t seq = 0; seq < this->sequences.size(); seq++)
 				{
 					v_encodings_v[seq].resize(this->multi_spaced.size());
@@ -462,7 +467,7 @@
 			{
 				v_encodings_v.clear();
 				v_encodings_v.resize(this->sequences.size());
-				
+
 				for (size_t seq = 0; seq < this->sequences.size(); seq++)
 				{
 					v_encodings_v[seq].resize(this->multi_spaced.size());
@@ -476,7 +481,7 @@
 				v_hashings_v.clear();
 				v_encodings_v.resize(this->sequences.size());
 				v_hashings_v.resize(this->sequences.size());
-				
+
 				for (size_t seq = 0; seq < this->sequences.size(); seq++)
 				{
 					v_encodings_v[seq].resize(this->multi_spaced.size());
@@ -491,7 +496,7 @@
 				v_spacedKmers_v.clear();
 				v_encodings_v.resize(this->sequences.size());
 				v_spacedKmers_v.resize(this->sequences.size());
-				
+
 				for (size_t seq = 0; seq < this->sequences.size(); seq++)
 				{
 					v_encodings_v[seq].resize(this->multi_spaced.size());
@@ -508,7 +513,7 @@
 				v_encodings_v.resize(this->sequences.size());
 				v_hashings_v.resize(this->sequences.size());
 				v_spacedKmers_v.resize(this->sequences.size());
-				
+
 				for (size_t seq = 0; seq < this->sequences.size(); seq++)
 				{
 					v_encodings_v[seq].resize(this->multi_spaced.size());
@@ -523,7 +528,7 @@
 			{
 				v_encodings_v.clear();
 				v_encodings_v.resize(this->sequences.size());
-				
+
 				for (size_t seq = 0; seq < this->sequences.size(); seq++)
 					GetHashes_speedup_multi_previous_Rotated(this->sequences[seq], this->spaced_qmers, v_encodings_v[seq]);
 			}
@@ -533,7 +538,7 @@
 				v_hashings_v.clear();
 				v_encodings_v.resize(this->sequences.size());
 				v_hashings_v.resize(this->sequences.size());
-				
+
 				for (size_t seq = 0; seq < this->sequences.size(); seq++)
 				{
 					GetHashes_speedup_multi_previous_Rotated(this->sequences[seq], this->spaced_qmers, v_encodings_v[seq]);
@@ -546,7 +551,7 @@
 				v_spacedKmers_v.clear();
 				v_encodings_v.resize(this->sequences.size());
 				v_spacedKmers_v.resize(this->sequences.size());
-				
+
 				for (size_t seq = 0; seq < this->sequences.size(); seq++)
 				{
 					GetHashes_speedup_multi_previous_Rotated(this->sequences[seq], this->spaced_qmers, v_encodings_v[seq]);
@@ -561,7 +566,7 @@
 				v_encodings_v.resize(this->sequences.size());
 				v_hashings_v.resize(this->sequences.size());
 				v_spacedKmers_v.resize(this->sequences.size());
-				
+
 				for (size_t seq = 0; seq < this->sequences.size(); seq++)
 				{
 					GetHashes_speedup_multi_previous_Rotated(this->sequences[seq], this->spaced_qmers, v_encodings_v[seq]);
@@ -574,7 +579,7 @@
 			{
 				v_encodings_v.clear();
 				v_encodings_v.resize(this->sequences.size());
-				
+
 				for (size_t seq = 0; seq < this->sequences.size(); seq++)
 					GetHashes_with_ISSH_multi_v1(this->sequences[seq], this->multi_spaced, this->VV_shifts, this->v_pos_one, this->max_transient_length, v_encodings_v[seq]);
 			}
@@ -584,7 +589,7 @@
 				v_hashings_v.clear();
 				v_encodings_v.resize(this->sequences.size());
 				v_hashings_v.resize(this->sequences.size());
-				
+
 				for (size_t seq = 0; seq < this->sequences.size(); seq++)
 				{
 					GetHashes_with_ISSH_multi_v1(this->sequences[seq], this->multi_spaced, this->VV_shifts, this->v_pos_one, this->max_transient_length, v_encodings_v[seq]);
@@ -597,7 +602,7 @@
 				v_spacedKmers_v.clear();
 				v_encodings_v.resize(this->sequences.size());
 				v_spacedKmers_v.resize(this->sequences.size());
-				
+
 				for (size_t seq = 0; seq < this->sequences.size(); seq++)
 				{
 					GetHashes_with_ISSH_multi_v1(this->sequences[seq], this->multi_spaced, this->VV_shifts, this->v_pos_one, this->max_transient_length, v_encodings_v[seq]);
@@ -612,7 +617,7 @@
 				v_encodings_v.resize(this->sequences.size());
 				v_hashings_v.resize(this->sequences.size());
 				v_spacedKmers_v.resize(this->sequences.size());
-				
+
 				for (size_t seq = 0; seq < this->sequences.size(); seq++)
 				{
 					GetHashes_with_ISSH_multi_v1(this->sequences[seq], this->multi_spaced, this->VV_shifts, this->v_pos_one, this->max_transient_length, v_encodings_v[seq]);
@@ -625,7 +630,7 @@
 			{
 				v_encodings_v.clear();
 				v_encodings_v.resize(this->sequences.size());
-				
+
 				for (size_t seq = 0; seq < this->sequences.size(); seq++)
 					GetHashes_with_ISSH_multi_col(this->sequences[seq], this->infoCol, v_encodings_v[seq]);
 			}
@@ -635,7 +640,7 @@
 				v_hashings_v.clear();
 				v_encodings_v.resize(this->sequences.size());
 				v_hashings_v.resize(this->sequences.size());
-				
+
 				for (size_t seq = 0; seq < this->sequences.size(); seq++)
 				{
 					GetHashes_with_ISSH_multi_col(this->sequences[seq], this->infoCol, v_encodings_v[seq]);
@@ -648,7 +653,7 @@
 				v_spacedKmers_v.clear();
 				v_encodings_v.resize(this->sequences.size());
 				v_spacedKmers_v.resize(this->sequences.size());
-				
+
 				for (size_t seq = 0; seq < this->sequences.size(); seq++)
 				{
 					GetHashes_with_ISSH_multi_col(this->sequences[seq], this->infoCol, v_encodings_v[seq]);
@@ -663,7 +668,7 @@
 				v_encodings_v.resize(this->sequences.size());
 				v_hashings_v.resize(this->sequences.size());
 				v_spacedKmers_v.resize(this->sequences.size());
-				
+
 				for (size_t seq = 0; seq < this->sequences.size(); seq++)
 				{
 					GetHashes_with_ISSH_multi_col(this->sequences[seq], this->infoCol, v_encodings_v[seq]);
@@ -676,7 +681,7 @@
 			{
 				v_encodings_v.clear();
 				v_encodings_v.resize(this->sequences.size());
-				
+
 				for (size_t seq = 0; seq < this->sequences.size(); seq++)
 					GetHashes_with_ISSH_multi_col_parallel(this->sequences[seq], this->infoCol, v_encodings_v[seq]);
 			}
@@ -686,7 +691,7 @@
 				v_hashings_v.clear();
 				v_encodings_v.resize(this->sequences.size());
 				v_hashings_v.resize(this->sequences.size());
-				
+
 				for (size_t seq = 0; seq < this->sequences.size(); seq++)
 				{
 					GetHashes_with_ISSH_multi_col_parallel(this->sequences[seq], this->infoCol, v_encodings_v[seq]);
@@ -699,7 +704,7 @@
 				v_spacedKmers_v.clear();
 				v_encodings_v.resize(this->sequences.size());
 				v_spacedKmers_v.resize(this->sequences.size());
-				
+
 				for (size_t seq = 0; seq < this->sequences.size(); seq++)
 				{
 					GetHashes_with_ISSH_multi_col_parallel(this->sequences[seq], this->infoCol, v_encodings_v[seq]);
@@ -714,7 +719,7 @@
 				v_encodings_v.resize(this->sequences.size());
 				v_hashings_v.resize(this->sequences.size());
 				v_spacedKmers_v.resize(this->sequences.size());
-				
+
 				for (size_t seq = 0; seq < this->sequences.size(); seq++)
 				{
 					GetHashes_with_ISSH_multi_col_parallel(this->sequences[seq], this->infoCol, v_encodings_v[seq]);
@@ -727,7 +732,7 @@
 			{
 				v_encodings_v.clear();
 				v_encodings_v.resize(this->sequences.size());
-				
+
 				for (size_t seq = 0; seq < this->sequences.size(); seq++)
 					GetHashes_with_ISSH_multi_row(this->sequences[seq], this->infoRow, v_encodings_v[seq]);
 			}
@@ -737,7 +742,7 @@
 				v_hashings_v.clear();
 				v_encodings_v.resize(this->sequences.size());
 				v_hashings_v.resize(this->sequences.size());
-				
+
 				for (size_t seq = 0; seq < this->sequences.size(); seq++)
 				{
 					GetHashes_with_ISSH_multi_row(this->sequences[seq], this->infoRow, v_encodings_v[seq]);
@@ -750,7 +755,7 @@
 				v_spacedKmers_v.clear();
 				v_encodings_v.resize(this->sequences.size());
 				v_spacedKmers_v.resize(this->sequences.size());
-				
+
 				for (size_t seq = 0; seq < this->sequences.size(); seq++)
 				{
 					GetHashes_with_ISSH_multi_row(this->sequences[seq], this->infoRow, v_encodings_v[seq]);
@@ -765,7 +770,7 @@
 				v_encodings_v.resize(this->sequences.size());
 				v_hashings_v.resize(this->sequences.size());
 				v_spacedKmers_v.resize(this->sequences.size());
-				
+
 				for (size_t seq = 0; seq < this->sequences.size(); seq++)
 				{
 					GetHashes_with_ISSH_multi_row(this->sequences[seq], this->infoRow, v_encodings_v[seq]);
@@ -833,6 +838,11 @@
 			inline const std::vector<SpacedQmer>& getSpacedQmers() const
 			{
 				return this->multi_spaced;
+			}
+
+			inline const size_t getSpacedQmerCount() const
+			{
+				return this->multi_spaced.size();
 			}
 
 		private:
